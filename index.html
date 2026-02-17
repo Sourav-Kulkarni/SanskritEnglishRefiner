@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sanskrit Text Editor</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital@0;1&family=Tiro+Devanagari+Sanskrit:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-left">
+          <div class="brand-mark">॥</div>
+          <div class="brand-text">
+            <h1>Sanskrit-English Refiner</h1>
+            <p>Text Annotation & Correction Tool</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <label class="btn btn-secondary" for="file-input">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5-5 5 5M12 5v11"
+              />
+            </svg>
+            Load JSON
+          </label>
+          <input
+            type="file"
+            id="file-input"
+            accept=".json"
+            style="display: none"
+          />
+          <button class="btn btn-primary" id="save-btn" disabled>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5-5 5 5M12 5v11"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19 21H5a2 2 0 01-2-2V7l4-4h10l4 4v12a2 2 0 01-2 2z"
+              />
+            </svg>
+            Save JSON
+          </button>
+          <button
+            class="btn btn-ghost"
+            id="add-btn"
+            disabled
+            title="Add new verse"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 4v16m8-8H4"
+              />
+            </svg>
+            Add Verse
+          </button>
+          <a
+            class="btn btn-ghost"
+            href="README.md"
+            target="_blank"
+            rel="noopener"
+            title="Open README"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              />
+            </svg>
+            README
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Drop Zone / Empty State -->
+    <div class="drop-zone" id="drop-zone">
+      <div class="drop-zone-inner">
+        <label
+          class="drop-icon"
+          for="file-input"
+          aria-hidden="false"
+          title="Load JSON"
+          style="cursor: pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1.2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+          </svg>
+        </label>
+        <p class="drop-title">Load a Sanskrit Mapping JSON</p>
+        <p class="drop-subtitle">
+          Drag & drop a .json file here, or use the <em>Load JSON</em> button
+          above
+        </p>
+      </div>
+    </div>
+
+    <!-- Toolbar (shown after load) -->
+    <div class="toolbar hidden" id="toolbar">
+      <div class="toolbar-inner">
+        <div class="file-info" id="file-info"></div>
+        <div class="toolbar-controls">
+          <!-- <input type="search" id="search-input" placeholder="Search verses…" /> -->
+          <label class="toggle-label">
+            <input type="checkbox" id="edit-mode-toggle" />
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            Edit Mode
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main content area -->
+    <main class="main-content hidden" id="main-content">
+      <div class="entries-container" id="entries-container"></div>
+    </main>
+
+    <!-- Toast notifications -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-backdrop hidden" id="modal-backdrop">
+      <div class="modal">
+        <h3>Delete Verse</h3>
+        <p>
+          Are you sure you want to delete this verse? This action cannot be
+          undone.
+        </p>
+        <div class="modal-actions">
+          <button class="btn btn-ghost" id="modal-cancel">Cancel</button>
+          <button class="btn btn-danger" id="modal-confirm">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
