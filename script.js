@@ -1,3 +1,14 @@
+// Ensure Load JSON button triggers file input
+document.addEventListener('DOMContentLoaded', function () {
+  const loadBtn = document.getElementById('load-file-btn');
+  const fileInput = document.getElementById('file-input');
+  if (loadBtn && fileInput) {
+    loadBtn.addEventListener('click', function (e) {
+      // Only trigger if not disabled
+      if (!loadBtn.disabled) fileInput.click();
+    });
+  }
+});
 /* ── State ─────────────────────────────────────────────────────────────────── */
 let data = [];           // The loaded mapping array
 let fileName = '';       // Original filename for save
@@ -6,7 +17,6 @@ let deleteTarget = null; // Index queued for deletion
 /* ── DOM References ────────────────────────────────────────────────────────── */
 const fileInput       = document.getElementById('file-input');
 const saveBtn         = document.getElementById('save-btn');
-const addBtn          = document.getElementById('add-btn');
 const dropZone        = document.getElementById('drop-zone');
 const toolbar         = document.getElementById('toolbar');
 const mainContent     = document.getElementById('main-content');
@@ -292,11 +302,6 @@ document.addEventListener('keydown', (e) => {
     return;
   }
 });
-
-
-
-/* ── Header "Add Verse" → append at end ─────────────────────────────────────── */
-addBtn.addEventListener('click', () => insertAt(data.length));
 
 
 /* ── Delete ──────────────────────────────────────────────────────────────────── */

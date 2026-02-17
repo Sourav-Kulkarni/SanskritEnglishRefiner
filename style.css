@@ -95,6 +95,13 @@ body {
   flex-wrap: wrap;
 }
 
+.readme-link {
+  display: inline-flex;
+  color: #fff;
+  text-decoration: none;
+  align-items: center;
+  gap: 7px;
+}
 
 /* ── Buttons ───────────────────────────────────────────────────────────────── */
 .btn {
@@ -146,6 +153,7 @@ body {
   font-size: .8rem;
   gap: 5px;
 }
+
 
 
 /* ── Drop Zone ─────────────────────────────────────────────────────────────── */
