@@ -104,6 +104,24 @@ Click **Save JSON** in the header or press `Ctrl+S` at any time. Before writing 
 - The inserter zones and delete buttons are **hidden in read mode** and only appear during editing to keep the read view clean.
 - The search bar **hides inserter zones** while active to avoid confusion in filtered views.
 - The modal confirmation for deletion can be dismissed by clicking the backdrop or the Cancel button.
+- Sometimes the OCR-ed text blocks contain data split across multiple lines. Editors may wish to remove these extraneous line breaks and merge all text into a single paragraph. One can do this manually, or make a text selection and use the keyboard shortcut `Ctrl+J` to remove all line breaks from that selection.
+
+```
+------ With line breaks ---------
+That which is the first creation of the Creator; 
+that which bears the offering made according 
+to due rites; that which is the offerer; those 
+two which make time; that which pervades all 
+space, having for its quality what is perceived 
+by the ear; that which is the womb of all seeds; 
+that by which all living beings breathe; endowed 
+with these eight visible forms, may the 
+supreme Lord protect you! ( 1 )
+
+------ Without line breaks ---------
+That which is the first creation of the Creator;  that which bears the offering made according  to due rites; that which is the offerer; those  two which make time; that which pervades all  space, having for its quality what is perceived  by the ear; that which is the womb of all seeds;  that by which all living beings breathe; endowed  with these eight visible forms, may the  supreme Lord protect you! ( 1 )
+
+```
 
 ---
 
