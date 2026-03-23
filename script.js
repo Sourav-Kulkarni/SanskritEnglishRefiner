@@ -190,7 +190,7 @@ function buildCard(item, idx) {
 
       <div class="map-id-row">
         <div class="map-id-display">
-          <span class="id-label">Verse</span>
+          <span class="id-label">Map</span>
           <span class="id-value">${escHtml(String(item.map_id))}</span>
         </div>
         <div class="map-id-editable">
@@ -476,7 +476,7 @@ function saveJSON() {
       if (typeof id === "number") maxSeen = Math.max(maxSeen, id);
     }
 
-    const obj = { map_id: id, sanskrit: item.sanskrit, english: item.english };
+    const obj = { map_id: String(id), sanskrit: item.sanskrit, english: item.english };
     if ((item.notes ?? "").trim()) obj.notes = item.notes;
     return obj;
   });
