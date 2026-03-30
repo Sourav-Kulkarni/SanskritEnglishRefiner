@@ -83,6 +83,7 @@ function loadFile(file) {
       data = parsed.map((item) => ({
         map_id: item.map_id ?? "",
         sanskrit: item.sanskrit ?? "",
+        anvaya: item.anvaya ?? "",
         english: item.english ?? "",
         notes: item.notes ?? "",
       }));
@@ -158,7 +159,7 @@ function buildInserter(before) {
 }
 
 function insertAt(before) {
-  data.splice(before, 0, { map_id: "", sanskrit: "", english: "", notes: "" });
+  data.splice(before, 0, { map_id: "", sanskrit: "", anvaya: "", english: "", notes: "" });
   renderAll();
   updateFileInfo();
 
@@ -223,6 +224,14 @@ function buildCard(item, idx) {
                   data-field="sanskrit" data-idx="${idx}" rows="3">${escHtml(item.sanskrit)}</textarea>
       </div>
 
+      <div class="anvaya-block${(item.anvaya ?? "").trim() ? "" : " empty-anvaya"}">
+        <div class="field-label">Anvaya</div>
+        <div class="anvaya-display">${(item.anvaya ?? "").trim() ? escHtml(item.anvaya) : "--"}</div>
+        <textarea class="edit-area anvaya-edit"
+                  data-field="anvaya" data-idx="${idx}" rows="3"
+                  placeholder="">${escHtml(item.anvaya ?? "")}</textarea>
+      </div>
+
       <div class="english-block">
         <div class="field-label">Translation</div>
         <div class="english-text">${escHtml(item.english)}</div>
@@ -274,6 +283,16 @@ function syncField(el) {
     card.querySelector(".id-value").textContent = val;
   } else if (field === "sanskrit") {
     card.querySelector(".sanskrit-text").textContent = val;
+  } else if (field === "anvaya") {
+    const anvayaDisplay = card.querySelector(".anvaya-display");
+    const anvayaBlock = card.querySelector(".anvaya-block");
+    if (val.trim()) {
+      anvayaDisplay.textContent = val;
+      anvayaBlock.classList.remove("empty-anvaya");
+    } else {
+      anvayaDisplay.textContent = "No anvaya yet…";
+      anvayaBlock.classList.add("empty-anvaya");
+    }
   } else if (field === "english") {
     card.querySelector(".english-text").textContent = val;
   } else if (field === "notes") {
@@ -409,6 +428,7 @@ function applySearch(query) {
       !q ||
       String(item.map_id).toLowerCase().includes(q) ||
       item.sanskrit.toLowerCase().includes(q) ||
+      (item.anvaya ?? "").toLowerCase().includes(q) ||
       item.english.toLowerCase().includes(q) ||
       item.notes.toLowerCase().includes(q);
 
@@ -441,6 +461,7 @@ function isBlankEntry(item) {
   return (
     String(item.map_id ?? "").trim() === "" &&
     (item.sanskrit ?? "").trim() === "" &&
+    (item.anvaya ?? "").trim() === "" &&
     (item.english ?? "").trim() === "" &&
     (item.notes ?? "").trim() === ""
   );
@@ -477,6 +498,7 @@ function saveJSON() {
     }
 
     const obj = { map_id: String(id), sanskrit: item.sanskrit, english: item.english };
+    if ((item.anvaya ?? "").trim()) obj.anvaya = item.anvaya;
     if ((item.notes ?? "").trim()) obj.notes = item.notes;
     return obj;
   });

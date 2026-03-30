@@ -586,6 +586,36 @@ body.edit-mode .entry-card {
   min-height: 80px;
 }
 
+/* ── Anvaya Block ──────────────────────────────────────────────────────────── */
+.anvaya-block {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.anvaya-display {
+  font-family: var(--font-devanagari);
+  font-size: 1.2rem;
+  line-height: 2.0;
+  color: var(--ink-mid);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.anvaya-block.empty-anvaya .anvaya-display {
+  color: var(--ink-light);
+  font-style: italic;
+  opacity: .55;
+}
+
+.anvaya-edit {
+  font-family: var(--font-devanagari);
+  font-size: 1.05rem;
+  line-height: 2.0;
+  text-align: center;
+  min-height: 80px;
+}
+
+
 /* ── English Block ─────────────────────────────────────────────────────────── */
 .english-block {
   border-top: 1px solid var(--border-light);
@@ -646,6 +676,7 @@ body.edit-mode .entry-card {
 body.edit-mode .entry-card { background: #fffcf9; }
 
 body.edit-mode .sanskrit-text,
+body.edit-mode .anvaya-display,
 body.edit-mode .english-text,
 body.edit-mode .notes-display { display: none; }
 

@@ -1,5 +1,5 @@
 # Sanskrit English Refiner — Text Annotation & Correction Tool
-A tool to edit and annotate Sanskrit-English parallel corpora
+A tool to edit and annotate Sanskrit-English parallel corpora. Tool link: https://sourav-kulkarni.github.io/SanskritEnglishRefiner/
 
 A lightweight, browser-based editor for reviewing, correcting, and annotating Sanskrit–English mapping files. No installation, no server, no dependencies — just open `index.html` in any modern browser.
 
@@ -27,6 +27,7 @@ The tool expects a **JSON array** of mapping objects. Each object must have at l
 |---|---|---|
 | `map_id` | number or string | A unique identifier for the verse (e.g. `1`, `"01-02-003"`) |
 | `sanskrit` | string | The Sanskrit text in Devanagari script |
+| `anvaya` | string | *(optional)* Prose order (anvaya) of the sanskrit text |
 | `english` | string | The English translation |
 | `notes` | string | *(optional)* Scholarly notes or commentary |
 
